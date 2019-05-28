@@ -1,10 +1,10 @@
-const mergeMeetingTimes = meetingTimes => {
-  // 1. get sorted times
-  // 2. create merged times array
-  // 3. compare a)merged time with b)current time
-  // 3a. if can merge (b.starTime <= a.endTime) - merge it (b.startTime, max(endTimes))
-  // 3b. else - push current time
+// 1. get sorted times
+// 2. create merged times array
+// 3. compare a)merged time with b)current time
+// 3a. if can merge (b.starTime <= a.endTime) - merge it (b.startTime, max(endTimes))
+// 3b. else - push current time
 
+const mergeMeetingTimes = meetingTimes => {
   const sortedTimes = meetingTimes.sort((a, b) => a.startTime - b.startTime);
 
   const mergedTimes = [sortedTimes[0]];
