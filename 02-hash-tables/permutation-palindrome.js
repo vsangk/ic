@@ -1,7 +1,24 @@
 function hasPalindromePermutation(theString) {
   // Check if any permutation of the input is a palindrome
+  // use a set
+  // iterate over string
+  //   i. check if set has current char
+  //     ia. true - remove it
+  //     ib. false - add it
+  // check if set has more than 1 element
+  //   a. true - return flase
+  //   b. false - return true
 
-  return false;
+  const chars = new Set();
+  for (let i = 0; i < theString.length; i++) {
+    if (chars.has(theString[i])) {
+      chars.delete(theString[i]);
+    } else {
+      chars.add(theString[i]);
+    }
+  }
+
+  return chars.size < 2;
 }
 
 // Tests
