@@ -1,4 +1,23 @@
-function canTwoMoviesFillFlight(movieLengths, flightLength) {}
+function canTwoMoviesFillFlight(movieLengths, flightLength) {
+  // use a set
+  // iterate over the array
+  //   i. check if set has total - current
+  //     ia. true - return true
+  //     ib. false - add total - current into set
+  // return false if nothing found
+
+  const desiredMovieLengths = new Set();
+  for (let i = 0; i < movieLengths.length; i++) {
+    const desiredMovieLength = flightLength - movieLengths[i];
+    if (desiredMovieLengths.has(movieLengths[i])) {
+      return true;
+    } else {
+      desiredMovieLengths.add(desiredMovieLength);
+    }
+  }
+
+  return false;
+}
 
 // Tests
 
