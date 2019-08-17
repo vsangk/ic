@@ -4,8 +4,41 @@ class WordCloudData {
     this.populateWordsToCounts(inputString);
   }
 
+  isLetter(char) {
+    return (
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char) >= 0
+    );
+  }
+
   populateWordsToCounts(inputString) {
-    // Count the frequency of each word
+    // iterate over the string
+    //  i. check if current char is a letter
+    //   a. yes - toLowerCase and append to current word
+    //   b. no - add word to map if valid, clear the word
+    //     i. if valid word, add to object
+    //     ii. clear word
+
+    const addWord = word => {
+      if (word.length > 0) {
+        this.wordsToCounts.hasOwnProperty(word)
+          ? (this.wordsToCounts[word] += 1)
+          : (this.wordsToCounts[word] = 1);
+      }
+    };
+
+    let currentWord = '';
+    for (let i = 0; i < inputString.length; i++) {
+      if (this.isLetter(inputString[i])) {
+        currentWord += inputString[i].toLowerCase();
+
+        if (i === inputString.length - 1) {
+          addWord(currentWord);
+        }
+      } else {
+        addWord(currentWord);
+        currentWord = '';
+      }
+    }
   }
 }
 
