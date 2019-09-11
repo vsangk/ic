@@ -1,7 +1,24 @@
+// Use counting strategy
+// 1. Populate an array with 0 up to highest score
+// 2. store count at index of score
+// 3. iterate backwards and push onto new array
 function sortScores(unorderedScores, highestPossibleScore) {
-  // Sort the scores in O(n) time
+  const sorted = [];
+  const count = new Array(highestPossibleScore + 1).fill(0);
 
-  return unorderedScores;
+  for (let i = 0; i < unorderedScores.length; i++) {
+    count[unorderedScores[i]]++;
+  }
+
+  for (let j = highestPossibleScore; j >= 0; j--) {
+    const countAtIndex = count[j];
+
+    for (let k = countAtIndex; k > 0; k--) {
+      sorted.push(j);
+    }
+  }
+
+  return sorted;
 }
 
 // Tests
