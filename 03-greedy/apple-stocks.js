@@ -1,7 +1,24 @@
-function getMaxProfit(stockPrices) {
-  // Calculate the max profit
+// test cases
+// [4,7,2,1,5,6] - random case
+// [1,2,3,4] - all up
+// [4,3,2,1] - all down
+// [1,1,1,1] - stays same
 
-  return 0;
+function getMaxProfit(stockPrices) {
+  if (stockPrices.length < 2) {
+    throw new Error('needs at last two data points');
+  }
+
+  let bestProfit = stockPrices[1] - stockPrices[0];
+  let allTimeLow = stockPrices[0];
+
+  for (let i = 1; i < stockPrices.length; i++) {
+    const currentPrice = stockPrices[i];
+    bestProfit = Math.max(currentPrice - allTimeLow, bestProfit);
+    allTimeLow = Math.min(currentPrice, allTimeLow);
+  }
+
+  return bestProfit;
 }
 
 // Tests
