@@ -1,7 +1,47 @@
+// [-10, 1, -5, 5, 7, 8, 2]
+// review: i forgot second arguments for products of two
+
 function highestProductOf3(arrayOfInts) {
   // Calculate the highest product of three numbers
+  if (arrayOfInts.length < 3) {
+    throw new Error("it's wrong dude");
+  }
 
-  return 0;
+  let highest = Number.NEGATIVE_INFINITY;
+  let highestProductOfTwo = Number.NEGATIVE_INFINITY;
+  let highestProductOfThree = Number.NEGATIVE_INFINITY;
+  let lowest = Number.POSITIVE_INFINITY;
+  let lowestProductOfTwo = Number.POSITIVE_INFINITY;
+
+  for (let i = 0; i < arrayOfInts.length; i++) {
+    const currentNumber = arrayOfInts[i];
+
+    if (i > 1) {
+      highestProductOfThree = Math.max(
+        highestProductOfTwo * currentNumber,
+        lowestProductOfTwo * currentNumber,
+        highestProductOfThree
+      );
+    }
+
+    if (i > 0) {
+      highestProductOfTwo = Math.max(
+        highest * currentNumber,
+        lowest * currentNumber,
+        highestProductOfTwo
+      );
+      lowestProductOfTwo = Math.min(
+        lowest * currentNumber,
+        highest * currentNumber,
+        lowestProductOfTwo
+      );
+    }
+
+    highest = Math.max(currentNumber, highest);
+    lowest = Math.min(currentNumber, lowest);
+  }
+
+  return highestProductOfThree;
 }
 
 // Tests
