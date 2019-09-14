@@ -1,7 +1,24 @@
 function getProductsOfAllIntsExceptAtIndex(intArray) {
-  // Make a list of the products
+  if (intArray.length < 2) {
+    throw new Error('nope');
+  }
 
-  return [];
+  let currentProduct = 1;
+  let productOfAllOthers = [];
+
+  for (let i = 0; i < intArray.length; i++) {
+    productOfAllOthers[i] = currentProduct;
+    currentProduct *= intArray[i];
+  }
+
+  currentProduct = 1;
+
+  for (let j = productOfAllOthers.length - 1; j >= 0; j--) {
+    productOfAllOthers[j] *= currentProduct;
+    currentProduct *= intArray[j];
+  }
+
+  return productOfAllOthers;
 }
 
 // Tests
