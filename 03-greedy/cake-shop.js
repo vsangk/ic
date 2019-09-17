@@ -1,7 +1,22 @@
 function isFirstComeFirstServed(takeOut, dineIn, servedOrders) {
-  // Check if we're serving orders first-come, first-served
+  const takeOutLength = takeOut.length;
+  const dineInLength = dineIn.length;
+  let takeOutIndex = 0;
+  let dineInIndex = 0;
 
-  return false;
+  for (let i = 0; i < servedOrders.length; i++) {
+    const current = servedOrders[i];
+
+    if (takeOutIndex < takeOutLength && takeOut[takeOutIndex] === current) {
+      takeOutIndex++;
+    } else if (dineInIndex < dineInLength && dineIn[dineInIndex] === current) {
+      dineInIndex++;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 // Tests
