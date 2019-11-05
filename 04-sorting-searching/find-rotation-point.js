@@ -1,8 +1,33 @@
 function findRotationPoint(words) {
   // Find the rotation point in the vector
+  let startIndex = 0;
+  let endIndex = words.length - 1;
 
-  return false;
+  while (startIndex < endIndex) {
+    const searchIndex = Math.floor(startIndex + (endIndex - startIndex) / 2);
+    const current = words[searchIndex];
+
+    if (current >= words[0]) {
+      // go right
+      startIndex = searchIndex;
+    } else {
+      // go left
+      endIndex = searchIndex;
+    }
+
+    // If floor and ceiling have converged
+    if (startIndex + 1 === endIndex) {
+      // Between floor and ceiling is where we flipped to the beginning
+      // so ceiling is alphabetically first
+      break;
+    }
+  }
+
+  return endIndex;
 }
+
+// knew I needed BS and check against first element of the array
+// didn't know how to verify actual rotation point
 
 // Tests
 
