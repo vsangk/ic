@@ -1,7 +1,37 @@
-function mergeRanges(meetings) {
-  // Merge meetings ranges
+// 1. sort by startTime
+// 2. Iterate over each
+//    does next startTime begin before the current endTime
+//      if yes merge
+//        take largest endTime
+//        skip extra index
+//      else push
 
-  return [];
+function mergeRanges(meetings) {
+  const sortedMeetings = meetings.sort((a, b) => {
+    if (a.startTime < b.startTime) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  const mergedMeetings = [sortedMeetings[0]];
+
+  for (let i = 1; i < sortedMeetings.length; i++) {
+    const previousMeeting = mergedMeetings[mergedMeetings.length - 1];
+    const currentMeeting = sortedMeetings[i];
+
+    if (currentMeeting.startTime <= previousMeeting.endTime) {
+      // merge
+      previousMeeting.endTime = Math.max(
+        previousMeeting.endTime,
+        currentMeeting.endTime
+      );
+    } else {
+      mergedMeetings.push(currentMeeting);
+    }
+  }
+
+  return mergedMeetings;
 }
 
 // Tests
