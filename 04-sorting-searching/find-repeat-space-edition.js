@@ -1,7 +1,34 @@
 function findRepeat(numbers) {
-  // Find a number that appears more than once
+  let floor = 1;
+  let ceiling = numbers.length - 1;
 
-  return 0;
+  while (floor < ceiling) {
+    const midpoint = floor + Math.floor((ceiling - floor) / 2);
+    const floorLowerRange = floor;
+    const floorUpperRange = midpoint;
+    const ceilingLowerRange = midpoint + 1;
+    const ceilingUpperRange = ceiling;
+
+    const possibleUniqueNumbers = floorUpperRange - floorLowerRange + 1;
+    let intCount = 0;
+    numbers.forEach(n => {
+      if (n >= floorLowerRange && n <= floorUpperRange) {
+        intCount++;
+      }
+    });
+
+    if (intCount > possibleUniqueNumbers) {
+      // go left
+      floor = floorLowerRange;
+      ceiling = floorUpperRange;
+    } else {
+      //go right
+      floor = ceilingLowerRange;
+      ceiling = ceilingUpperRange;
+    }
+  }
+
+  return floor;
 }
 
 // Tests
