@@ -1,7 +1,16 @@
 function sortScores(unorderedScores, highestPossibleScore) {
-  // Sort the scores in O(n) time
+  const orderedScores = [];
+  const scoreCounts = new Array(highestPossibleScore + 1).fill(0);
 
-  return unorderedScores;
+  unorderedScores.forEach(s => scoreCounts[s]++);
+
+  for (let i = scoreCounts.length - 1; i >= 0; i--) {
+    for (let j = scoreCounts[i]; j > 0; j--) {
+      orderedScores.push(i);
+    }
+  }
+
+  return orderedScores;
 }
 
 // Tests
